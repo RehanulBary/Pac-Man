@@ -4,40 +4,40 @@
 #include <fstream>  // file handling (high score)
 #include <vector>
 #include <string>
-#include <cstdlib>  // for rand()
+#include <cstdlib>  
 
 
 using namespace std;
 using namespace sf;
 
 const int tileSize = 25;
-const float pacmanSpeed = 100.0f; // Pixels per second
-const float ghostSpeed = 80.0f;    // Pixels per second
-const float powerUpDuration = 8.0f; // Power-up lasts 8 seconds
-bool powerUpActive = false;    // Checks if pac-man is in power up mode
-Clock powerUpTimer;            // Checks how long power up is active
+const float pacmanSpeed = 100.0f; 
+const float ghostSpeed = 80.0f;    
+const float powerUpDuration = 8.0f; 
+bool powerUpActive = false;    
+Clock powerUpTimer;            
 bool isValidMove(const vector<string>& map, const Vector2f& position);
 
 // Function to load the high score from file
 int loadHighScore() {
     int highScore = 0;  // Initialize highScore to 0
-    ifstream inputFile("highscore.txt");  // Open file for reading
+    ifstream inputFile("highscore.txt");  
     if (inputFile.is_open()) {
-        inputFile >> highScore;  // Read the high score from the file
-        inputFile.close();       // Close the file
+        inputFile >> highScore;  
+        inputFile.close();       
     }
     else {
         cout << "Unable to open highscore.txt. Initializing high score to 0." << endl;
     }
-    return highScore;  // Return the high score value
+    return highScore;  
 }
 
 void saveHighScore(int highScore) {
-    ofstream outputFile("highscore.txt");  // Open the file for writing
+    ofstream outputFile("highscore.txt");  
     if (outputFile.is_open()) {
-        outputFile << highScore;  // Write the high score to the file
-        outputFile.close();  // Close the file after writing
-        cout << "High score saved: " << highScore << endl;  // Confirmation message
+        outputFile << highScore;  
+        outputFile.close();  
+        cout << "High score saved: " << highScore << endl;  
     }
     else {
         cout << "Error: Unable to save high score!" << endl;
@@ -48,9 +48,9 @@ struct Ghost {
     Sprite ghostSprite;
     Vector2f position;
     Vector2f velocity;
-    Clock moveClock;  // Clock to time direction changes
-    float moveInterval;  // Time between direction changes
-    float chaseDistance;  // minimum distance needed to switch to chase mode
+    Clock moveClock;  
+    float moveInterval;  
+    float chaseDistance;  
 
     Ghost(const Vector2f& startPosition, const Texture& texture, float interval = 1.0f, float chaseDist = 100.0f)
         : moveInterval(interval), chaseDistance(chaseDist) {
